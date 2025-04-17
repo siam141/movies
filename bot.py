@@ -7,6 +7,17 @@ from pyrogram import idle
 import logging
 import logging.config
 
+
+from pyrogram.errors import FloodWait
+import asyncio
+
+try:
+    JisshuBot.start()
+except FloodWait as e:
+    print(f"FloodWait: Waiting for {e.value} seconds...")
+    asyncio.sleep(e.value)
+    JisshuBot.start()
+
 # Get logging configurations
 logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
